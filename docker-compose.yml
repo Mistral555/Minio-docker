@@ -1,0 +1,41 @@
+services:
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    expose:
+      - "9000"
+      - "9001"
+    env_file:
+      - .env
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - minio_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s      # vérifie toutes les 10 secondes
+      timeout: 5s        # échec si pas de réponse en 5s
+      retries: 3         # 3 échecs consécutifs = conteneur "unhealthy"
+      start_period: 15s  # laisse 15s à MinIO pour démarrer avant de commencer
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "9000:9000"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      minio:
+        condition: service_healthy   # Nginx attend que MinIO soit healthy
+    networks:
+      - minio_net
+
+volumes:
+  minio_data:
+
+networks:
+  minio_net:
+    driver: bridge
