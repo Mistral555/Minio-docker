@@ -6,7 +6,7 @@ MinIO est un serveur de stockage objet compatible avec l'API Amazon S3, idéal p
 
 ---
 
-## 📐 Architecture
+## Architecture
 
 ```
 Internet / Navigateur
@@ -29,7 +29,7 @@ Internet / Navigateur
 
 ---
 
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 minio-docker/
@@ -44,7 +44,7 @@ minio-docker/
 
 ---
 
-## 🚀 Lancement
+## Lancement
 
 ### Prérequis
 
@@ -81,7 +81,7 @@ docker compose ps
 
 ---
 
-## 🌐 Accès
+## Accès
 
 | Interface | URL |
 |-----------|-----|
@@ -92,7 +92,7 @@ Identifiants : ceux définis dans ton `.env`.
 
 ---
 
-## 🔍 Commandes utiles
+## Commandes utiles
 
 ```bash
 # Démarrer les services
@@ -116,7 +116,7 @@ docker compose down -v
 
 ---
 
-## 💾 Persistance des données
+## Persistance des données
 
 Les données MinIO sont stockées dans un volume Docker nommé `minio_data`. Ce volume persiste même si les conteneurs sont supprimés.
 
@@ -130,7 +130,7 @@ docker volume inspect minio_data
 
 ---
 
-## 🏥 Healthcheck
+## Healthcheck
 
 Le service `minio` expose un endpoint de santé natif :
 
@@ -142,7 +142,7 @@ Docker vérifie cet endpoint toutes les 10 secondes. Le service `nginx` ne déma
 
 ---
 
-## 🔒 Sécurité
+## Sécurité
 
 - Les credentials sont stockés dans `.env`, jamais dans le code
 - Le fichier `.env` est exclu du dépôt Git via `.gitignore`
@@ -151,7 +151,7 @@ Docker vérifie cet endpoint toutes les 10 secondes. Le service `nginx` ne déma
 
 ---
 
-## 📚 Ressources
+## Ressources
 
 - [Documentation officielle MinIO](https://min.io/docs/)
 - [Image Docker MinIO](https://quay.io/repository/minio/minio)
